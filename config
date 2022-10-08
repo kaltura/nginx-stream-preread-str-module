@@ -1,0 +1,22 @@
+ngx_addon_name=ngx_stream_preread_str_module
+ngx_module_libs=
+
+PRS_STREAM_SRCS="                                                 \
+               $ngx_addon_dir/src/ngx_stream_preread_str_module.c \
+               "
+
+PRS_STREAM_MODULES="                                              \
+               ngx_stream_preread_str_module                      \
+               "
+
+if [ -n "$ngx_module_link" ]; then
+    ngx_module_type=STREAM
+    ngx_module_name=$PRS_STREAM_MODULES
+    ngx_module_srcs=$PRS_STREAM_SRCS
+
+    . auto/module
+
+else
+    STREAM_MODULES="$STREAM_MODULES $PRS_STREAM_MODULES"
+    NGX_ADDON_SRCS="$NGX_ADDON_SRCS $PRS_STREAM_SRCS"
+fi
