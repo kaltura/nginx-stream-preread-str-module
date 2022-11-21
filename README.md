@@ -5,6 +5,8 @@ The string is consumed up to a predefined delimiter, and is exposed as a stream 
 
 ## Build
 
+![Build Status](https://github.com/kaltura/nginx-stream-preread-str-module/actions/workflows/ci.yml/badge.svg)
+
 To link statically against nginx, cd to nginx source directory and execute:
 
     ./configure --add-module=/path/to/nginx-stream-preread-str-module --with-stream
