@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 set -o nounset                              # Treat unset variables as an error
 
 BASE_DOWNLOAD_URI=http://nginx.org/download
