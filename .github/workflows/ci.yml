@@ -32,7 +32,7 @@ jobs:
             libssl-dev \
             libpcre3-dev \
             libxml2-dev \
-            wget \
+            curl \
             unzip \
       - name : Build
         run: ./ci_build.sh ${{ matrix.confargs }}
