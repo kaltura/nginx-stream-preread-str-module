@@ -140,7 +140,7 @@ ngx_stream_preread_str_preread_handler(ngx_stream_session_t *s)
 #if defined(nginx_version) && nginx_version >= 1025005
     /* consume the data from the socket */
     size = ctx->header.len + pscf->delim.len;
-    if (c->recv(c, c->buffer->start, size) != (ssize_t) size) {
+    if (c->recv(c, ctx->header.data, size) != (ssize_t) size) {
         return NGX_STREAM_INTERNAL_SERVER_ERROR;
     }
 #endif
