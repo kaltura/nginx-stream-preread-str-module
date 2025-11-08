@@ -82,6 +82,9 @@ ngx_stream_preread_str_preread_handler(ngx_stream_session_t *s)
     ngx_connection_t                   *c;
     ngx_stream_preread_str_ctx_t       *ctx;
     ngx_stream_preread_str_srv_conf_t  *pscf;
+#if defined(nginx_version) && nginx_version >= 1025005
+    size_t                              size;
+#endif
 
     c = s->connection;
 
@@ -133,6 +136,14 @@ ngx_stream_preread_str_preread_handler(ngx_stream_session_t *s)
 
     ctx->header.len = ctx->pos - 1 - ctx->header.data;
     c->buffer->pos = ctx->pos + s2_len;
+
+#if defined(nginx_version) && nginx_version >= 1025005
+    /* consume the data from the socket */
+    size = ctx->header.len + pscf->delim.len;
+    if (c->recv(c, c->buffer->start, size) != (ssize_t) size) {
+        return NGX_STREAM_INTERNAL_SERVER_ERROR;
+    }
+#endif
 
     return NGX_OK;
 }
