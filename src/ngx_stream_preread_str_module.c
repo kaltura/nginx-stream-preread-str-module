@@ -175,7 +175,7 @@ ngx_stream_preread_str_preread_handler(ngx_stream_session_t *s)
 
     /* consume the data from the socket */
     size = ctx->header.len + pscf->delim.len;
-    if (c->recv(c, ctx->header.data, size) != (ssize_t) size) {
+    if (recv(c->fd, ctx->header.data, size, 0) != (ssize_t) size) {
         return NGX_STREAM_INTERNAL_SERVER_ERROR;
     }
 #endif
